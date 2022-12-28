@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Book.css";
+import "./Spinner.css";
+
 const Book = () => {
+  let todatDate = new Date();
+  let finalTodayDate=  todatDate.toISOString().split('T')[0];
   const [data, setData] = useState();
   const [wing, setWing] = useState();
   const [shift, setShift] = useState();
   const [getwing, setGetwing] = useState();
   const [getshift, setGetshift] = useState();
-  const [getdate, setGetdate] = useState();
+  const [getdate, setGetdate] = useState(finalTodayDate);
   const [getseat, setGetseat] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [empId, setempId] = useState();
   const [bookingResponse, setBookingResponse] = useState();
   const [resultPop, setResultPop] = useState(false);
+
+  const [fgetwing, setFgetwing] = useState();
+  const [fgetshift, setFgetshift] = useState();
+  const [fgetdate, setFgetdate] = useState(finalTodayDate);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+
 
   function toggle() {
     setIsOpen((isOpen) => !isOpen);
@@ -21,16 +33,21 @@ const Book = () => {
     setResultPop((resultPop) => !resultPop);
   }
 
-  const getSeatData = (wing, date, shift) => {
+  const getSeatData = (wingn, daten, shiftn) => {
     let datas = {
-      wing: wing,
-      date: `${date}`,
-      shift: `${shift}`,
+      wing: wingn,
+      date: `${daten}`,
+      shift: `${shiftn}`,
     };
+   
+
+    
+
+    setIsLoading(true);
     axios.post("http://localhost:5000/availablity", datas).then((response) => {
       if (response.status == 200) {
         setData(response.data);
-        console.log(response.data);
+        setIsLoading(false);
       }
     });
   };
@@ -38,25 +55,49 @@ const Book = () => {
   const fetchapi = () => {
     getSeatData(getwing, getdate, getshift);
   };
+
   const getWings = () => {
+ 
+
     axios.get("http://localhost:5000/availablity/wings").then((response) => {
       if (response.status == 200) {
         setWing(response.data.wings);
+        setFgetwing(response.data.wings[0].id);
+        setGetwing(response.data.wings[0].id);
+        
       }
     });
   };
+
   const getShifts = () => {
+    
+
     axios.get("http://localhost:5000/availablity/shifts").then((response) => {
       if (response.status == 200) {
         setShift(response.data.shifts);
+        console.log(response.data.shifts);
+        setFgetshift(response.data.shifts[0].id);
+        setGetshift(response.data.shifts[0].id);
+
+   
+
+       
       }
     });
   };
   useEffect(() => {
-    getSeatData();
+
     getWings();
     getShifts();
+  
   }, []);
+  useEffect(()=>{
+    if((fgetwing != undefined)&&(fgetshift != undefined)){
+      getSeatData(fgetwing, fgetdate, fgetshift);
+
+    }
+
+  }, [fgetwing, fgetshift])
   const callBooking = (e) => {
     e.preventDefault();
     setIsOpen((isOpen) => !isOpen);
@@ -71,10 +112,11 @@ const Book = () => {
       booked_by: `${empId}`,
       booking_type: 0,
     };
+ 
+
     axios.post("http://localhost:5000/booking", bookData).then((response) => {
       setBookingResponse(response.data.message);
       setResultPop(true);
-      
     });
   };
   const testa = (e) => {
@@ -83,83 +125,84 @@ const Book = () => {
   };
   return (
     <div className="container">
+          {isLoading && <div className="loading-spinner"></div> }  
+      <div className="small-Nav">
+      <h3>Booking</h3>
+      <span class="badge bg-danger"><i class="fas fa-sign-out-alt"></i> Log Out</span>
+      </div>
       <div className="header">
         <div className="wings-coloum">
           <label>
             Select Wing
-            <select onClick={(e) => setGetwing(e.target.value)}>
+            </label>
+            <select onLoad={(e) => setGetwing(e.target.value)} onClick={(e) => setGetwing(e.target.value)} >
               {wing != undefined &&
                 wing.map((wings) => {
                   return <option value={wings.id}>{wings.wingname}</option>;
                 })}
             </select>
-          </label>
+         
         </div>
         <div className="shift-coloum">
           <label>
             Select Shift
+            </label>
             <select onChange={(e) => setGetshift(e.target.value)}>
               {shift != undefined &&
                 shift.map((shifts) => {
                   return <option value={shifts.id}>{shifts.shiftname}</option>;
                 })}
             </select>
-          </label>
+         
         </div>
         <div className="shift-coloum">
           <label>
             Select Date
-            <input type="date" onChange={(e) => setGetdate(e.target.value)} />
-          </label>
+            </label>
+            <input type="date" defaultValue={finalTodayDate} onChange={(e) => setGetdate(e.target.value)} />
         </div>
         <div className="submit-coloum">
           <button onClick={fetchapi}>Submit</button>
         </div>
       </div>
-
       <div className="wing">
         {data != undefined &&
           data.wings.map((wing, index) => {
             return (
               <div key={wing.tableid} className="tableC">
-                {wing.seats.map((seat) => {
-                  return (
-                    // <div
-                    //   key={seat.seatid}
-                    //   className="seat"
-                    //   onClick={testa}
-                    //   id={seat.seatid}
-                    // >
-                    //   {seat.seatid}
-                    // </div>
-
-
-seat.availability==0 ?  <div
-  key={seat.seatid}
-  className="seat"
-  onClick={testa}
-  id={seat.seatid}
->
-  {seat.seatid}
-</div>
-      : seat.availability==1 ?  <div
-      key={seat.seatid}
-      className="seat orange"
-      onClick={testa}
-      id={seat.seatid}
-    >
-      {seat.seatid}
-    </div>
-      :  <div
-      key={seat.seatid}
-      className="seat red"
-      onClick={testa}
-      id={seat.seatid}
-    >
-      {seat.seatid}
-    </div>
-                  );
-                })}
+                <div className="seat-top">
+                  {wing.seats.map((seat, index) => {
+                    return (
+                      seat.seatid % 2 != 0 && (
+                        <div
+                          key={seat.seatid}
+                          className={seat.availability== 1? "seat orange" : seat.availability== 2 ? "seat red" : seat.availability== 0 && "seat"}
+                          onClick={testa}
+                          id={seat.seatid}
+                        >
+                          {seat.seatid}
+                        </div>
+                      )
+                    );
+                  })}
+                </div>
+                <div className="table-main"></div>
+                <div className="seat-bottom">
+                  {wing.seats.map((seat, index) => {
+                    return (
+                      seat.seatid % 2 == 0 && (
+                        <div
+                          key={seat.seatid}
+                          className={seat.availability== 1? "seat orange" : seat.availability== 2 ? "seat red" : seat.availability== 0 && "seat"}
+                          onClick={testa}
+                          id={seat.seatid}
+                        >
+                          {seat.seatid}
+                        </div>
+                      )
+                    );
+                  })}
+                </div>
               </div>
             );
           })}

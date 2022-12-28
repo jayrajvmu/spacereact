@@ -1,3 +1,9 @@
+.container{
+  margin-top: 20px;
+}
+h3{
+  text-align: left;
+}
 .wing{
     display: flex;
     justify-content: space-around;
@@ -6,56 +12,62 @@
     margin: 30px auto;
 }
 .header{
+  margin-top: 30px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   
 }
-.tableC{
+
+.small-Nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #d6d1d5;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #eff3f3;
+}
+.table-main{
+
     width: 400px;
     height: 130px;
-    background-color: antiquewhite;
-    border: 2px solid red;
+    background-color: #ffffff;
+    border: 2px solid #d6d1d5;
     border-radius: 3px;
-    margin: 30px;
+    margin:5px 30px;
     position:relative;
     display: flex;
     justify-content: space-around;
 }
+.tableC{
+  margin: 20px 0;
+}
 
 .seat{
-    position: absolute;
     width: 50px;
-    height: 50px;
-    background-color: aqua;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #00e239;
+    border-radius: 4px;
+    box-shadow: 0px 8px 36px rgb(179, 179, 179);
+
     
 }
 .seat:hover{
-    background-color: rgb(255, 19, 184);
+    background-color: #215cad;
 }
 
-.tableC div:nth-child(odd) {
-    top:-20px
-  }
-  .tableC div:nth-child(even) {
-    bottom:-20px
-  }
-  .tableC div:nth-child(1) {
-    left:20px;
-  }
-  .tableC div:nth-child(2) {
-    left:20px
-  }
-  .tableC div:nth-child(3) {
-    right:20px;
-  }
-  .tableC div:nth-child(4) {
-    right:20px
-  }
+.seat-top, .seat-bottom{
+  display: flex;
+  justify-content: space-around;
+}
+
+
 .red{
-  background-color: red;
+  border: 2px solid #e20000;
 }
 .orange{
-  background-color: orange;
+  border: 2px solid #d4a523;
 }
 
 
@@ -118,8 +130,10 @@ form, .pop {
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
-
-.form label {
+.header label{
+  margin-right: 15px;
+}
+.header label, .form label {
   margin-bottom: 0.5em;
   color: #444;
   font-weight: lighter;
@@ -131,11 +145,14 @@ form, .pop {
   margin-bottom: 15px;
   width: 100%;
 }
-.form input, .form select {
+.header input,.header select,.form input, .form select {
   padding: 10px 10px;
   border-radius: 5px;
   border: 1px solid #d6d1d5;
   margin-top: 5px;
+}
+.header input,.header select{
+  margin-top: 0px;
 }
 .form select {
   display: block;
@@ -144,7 +161,7 @@ form, .pop {
 }
 
 
-.form button {
+.header button, .form button {
   min-width: 100%;
   cursor: pointer;
   margin-right: 0.25em;
@@ -152,8 +169,12 @@ form, .pop {
   padding: 	0.938em;
   border: none;
   border-radius: 4px;
-  background-color: #22223B;
+  background-color: #215cad;
   color: #fefefe;
+}
+.header button{
+  padding: 	5px;
+
 }
 button:hover {
   background-color: #4A4E69;
