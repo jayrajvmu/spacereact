@@ -97,7 +97,7 @@ h3{
 
 
 
-form, .pop {
+.form, .pop {
   
   display: flex;
   flex-direction: column;

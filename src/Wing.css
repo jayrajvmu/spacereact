@@ -1,4 +1,5 @@
 .wrap{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    margin-top: 20px;
 }

@@ -32,10 +32,10 @@ const Sidebar = (props) => {
 
           <ul className="list-unstyled components">
             <li className="list-item">
-            <Link to="/home"> <i className="fas fa-home icon-color"></i></Link>
+            <Link to="/"> <i className="fas fa-home icon-color"></i></Link>
 
              
-             <span> <Link to="/home">Home</Link></span>
+             <span> <Link to="/">Home</Link></span>
             </li>
             <li className="list-item">
             <Link to="/wing"> <i className="fas fa-table icon-color"></i></Link>

@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Wing.css"
+import "./Wing.css";
+import CreateWing from "./CreateWing";
 
 
 function Wing() {
+  const [wingform, setWingform]=useState(false);
  const[data, setData]=useState();
-
  const getWing=()=>{
 axios.get('http://localhost:5000/wing').then((response)=>{
   setData(response.data.wing_name);
   
 })
+ }
 
+ const toggleWing=()=>{
+  console.log(wingform);
+  setWingform(!wingform)
  }
  console.log(data);
 useEffect(()=>{
@@ -34,8 +39,21 @@ return(
 )
 })}
         </div>
+        <div className="wing-forms">
         <div className="create-wing">
-        <h5>Create a Wing</h5>
+          <button onClick={toggleWing}>Create Wing</button>
+          {wingform &&  <CreateWing/>}
+       
+        </div>
+        <div>
+        <button onClick={toggleWing}>Create Table</button>
+          {wingform &&  <CreateWing/>}
+        </div>
+
+        <div>
+        <button onClick={toggleWing}>Create Seat</button>
+          {wingform &&  <CreateWing/>}
+        </div>
         </div>
       </div>
     </div>
