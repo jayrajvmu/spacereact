@@ -26,7 +26,7 @@ useEffect(()=>{
     <div className='container nopage'>
              <div className="small-Nav">
       <h3>Wing</h3>
-      <span class="badge bg-danger"><i class="fas fa-sign-out-alt"></i> Log Out</span>
+      <span className="badge bg-danger"><i className="fas fa-sign-out-alt"></i> Log Out</span>
       </div>
 
 
@@ -41,18 +41,9 @@ return(
         </div>
         <div className="wing-forms">
         <div className="create-wing">
-          <button onClick={toggleWing}>Create Wing</button>
+          <button onClick={toggleWing} className="button">Create Wing</button>
           {wingform &&  <CreateWing/>}
        
-        </div>
-        <div>
-        <button onClick={toggleWing}>Create Table</button>
-          {wingform &&  <CreateWing/>}
-        </div>
-
-        <div>
-        <button onClick={toggleWing}>Create Seat</button>
-          {wingform &&  <CreateWing/>}
         </div>
         </div>
       </div>

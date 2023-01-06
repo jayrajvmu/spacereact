@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
                     console.log(maximumtimetobook.toLocaleString());
                     console.log(now.toLocaleString());
                     if ((now > minimumtimetobook) && (now < maximumtimetobook)) {
-                        let slectSqlfromBooking = `SELECT * FROM booking WHERE date='${req.body.date}' AND status='1';`;
+                        let slectSqlfromBooking = `SELECT * FROM booking WHERE date='${req.body.date}' AND status='1'`;
                         db.query(slectSqlfromBooking, (errbook, resultbook) => {
                             if (errbook) {
                                 res.json({ 'success': false, 'message': `${errbook}` });
