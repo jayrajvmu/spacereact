@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.3.0-dev+20230116.e2bda4fb48
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2022 at 04:24 PM
+-- Generation Time: Jan 18, 2023 at 01:45 PM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- PHP Version: 8.1.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,7 +48,11 @@ INSERT INTO `booking` (`id`, `emp_id`, `seat_id`, `date`, `shift_id`, `status`, 
 (2, 1, 2, '2022-12-15', 1, 2, 1, 0, '2022-12-14 12:01:12'),
 (4, 6, 1, '2022-12-15', 2, 1, 6, 0, '2022-12-14 11:00:18'),
 (5, 1, 5, '2022-12-15', 2, 1, 1, 0, '2022-12-14 12:13:24'),
-(6, 4, 3, '2022-12-15', 2, 1, 4, 0, '2022-12-14 12:13:51');
+(6, 4, 3, '2022-12-15', 2, 1, 4, 0, '2022-12-14 12:13:51'),
+(7, 1, 1, '2022-12-16', 2, 1, 1, 0, '2022-12-15 15:50:14'),
+(8, 1, 1, '2022-12-17', 2, 1, 1, 0, '2022-12-16 15:34:56'),
+(9, 1, 1, '2023-01-03', 1, 1, 1, 0, '2023-01-02 15:04:24'),
+(10, 1, 15, '2023-01-07', 1, 1, 1, 0, '2023-01-06 12:11:14');
 
 -- --------------------------------------------------------
 
@@ -96,22 +100,35 @@ CREATE TABLE `seats` (
 --
 
 INSERT INTO `seats` (`id`, `name`, `table_id`, `type`, `created_by`, `created_at`, `booked_by`, `booked_at`, `booked_status`, `is_active`) VALUES
-(1, 'ws-seat1', 1, 0, 1, '2022-12-09 09:11:46', NULL, NULL, NULL, 0),
-(2, 'ws-seat2', 1, 0, 1, '2022-12-09 09:11:46', NULL, NULL, NULL, 0),
-(3, 'ws-seat3', 1, 0, 1, '2022-12-09 09:11:46', NULL, NULL, NULL, 0),
-(4, 'ws-seat4', 1, 0, 1, '2022-12-09 09:11:46', NULL, NULL, NULL, 0),
-(5, 'ws-seat5', 2, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(6, 'ws-seat6', 2, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(7, 'ws-seat7', 2, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(8, 'ws-seat8', 2, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(9, 'ws-seat9', 3, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(10, 'ws-seat10', 3, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(11, 'ws-seat11', 3, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(12, 'ws-seat12', 3, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(13, 'ws-seat13', 4, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(14, 'ws-seat14', 4, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(15, 'ws-seat15', 4, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0),
-(16, 'ws-seat16', 4, 0, 1, '2022-12-09 09:11:47', NULL, NULL, NULL, 0);
+(1, 'ws-seat1', 1, 0, 1, NULL, NULL, NULL, NULL, 0),
+(2, 'ws-seat2', 1, 0, 1, NULL, NULL, NULL, NULL, 0),
+(3, 'ws-seat3', 2, 0, 1, NULL, NULL, NULL, NULL, 0),
+(4, 'ws-seat4', 2, 0, 1, NULL, NULL, NULL, NULL, 0),
+(5, 'ws-seat5', 3, 0, 1, NULL, NULL, NULL, NULL, 0),
+(6, 'ws-seat6', 3, 0, 1, NULL, NULL, NULL, NULL, 0),
+(7, 'ws-seat7', 3, 0, 1, NULL, NULL, NULL, NULL, 0),
+(8, 'ws-seat8', 4, 0, 1, NULL, NULL, NULL, NULL, 0),
+(9, 'ws-seat9', 4, 0, 1, NULL, NULL, NULL, NULL, 0),
+(10, 'ws-seat10', 4, 0, 1, NULL, NULL, NULL, NULL, 0),
+(11, 'ws-seat11', 5, 0, 1, NULL, NULL, NULL, NULL, 0),
+(12, 'ws-seat12', 5, 0, 1, NULL, NULL, NULL, NULL, 0),
+(13, 'ws-seat13', 5, 0, 1, NULL, NULL, NULL, NULL, 0),
+(14, 'ws-seat14', 6, 0, 1, NULL, NULL, NULL, NULL, 0),
+(15, 'ws-seat15', 6, 0, 1, NULL, NULL, NULL, NULL, 0),
+(16, 'ws-seat16', 6, 0, 1, NULL, NULL, NULL, NULL, 0),
+(17, 'ws-seat17', 6, 0, 1, NULL, NULL, NULL, NULL, 0),
+(18, 'ws-seat18', 7, 0, 1, NULL, NULL, NULL, NULL, 0),
+(19, 'ws-seat19', 7, 0, 1, NULL, NULL, NULL, NULL, 0),
+(20, 'ws-seat20', 7, 0, 1, NULL, NULL, NULL, NULL, 0),
+(21, 'ws-seat21', 7, 0, 1, NULL, NULL, NULL, NULL, 0),
+(22, 'ws-seat22', 8, 0, 1, NULL, NULL, NULL, NULL, 0),
+(23, 'ws-seat23', 8, 0, 1, NULL, NULL, NULL, NULL, 0),
+(24, 'ws-seat24', 8, 0, 1, NULL, NULL, NULL, NULL, 0),
+(25, 'ws-seat25', 8, 0, 1, NULL, NULL, NULL, NULL, 0),
+(26, 'ws-seat26', 9, 0, 1, NULL, NULL, NULL, NULL, 0),
+(27, 'ws-seat27', 9, 0, 1, NULL, NULL, NULL, NULL, 0),
+(28, 'ws-seat28', 9, 0, 1, NULL, NULL, NULL, NULL, 0),
+(29, 'ws-seat29', 9, 0, 1, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -156,10 +173,15 @@ CREATE TABLE `tables` (
 --
 
 INSERT INTO `tables` (`id`, `name`, `wing_id`, `created_by`, `created_at`, `is_active`) VALUES
-(1, 'ws1', 1, 1, '2022-12-09 09:11:46', 0),
-(2, 'ws2', 1, 1, '2022-12-09 09:11:46', 0),
-(3, 'ws3', 1, 1, '2022-12-09 09:11:46', 0),
-(4, 'ws4', 1, 1, '2022-12-09 09:11:46', 0);
+(1, 'ws1', 1, 1, NULL, 0),
+(2, 'ws2', 1, 1, NULL, 0),
+(3, 'ws3', 2, 1, NULL, 0),
+(4, 'ws4', 2, 1, NULL, 0),
+(5, 'ws5', 2, 1, NULL, 0),
+(6, 'ws6', 3, 1, NULL, 0),
+(7, 'ws7', 3, 1, NULL, 0),
+(8, 'ws8', 3, 1, NULL, 0),
+(9, 'ws9', 3, 1, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -230,7 +252,9 @@ CREATE TABLE `wings` (
 --
 
 INSERT INTO `wings` (`id`, `name`, `total_tables`, `total_seats`, `created_by`, `created_at`, `updated_by`, `updated_at`, `is_active`) VALUES
-(1, 'digital', 4, 16, 1, '2022-12-09 09:11:46', NULL, NULL, 0);
+(1, 'Digital', 2, 2, 1, NULL, NULL, NULL, 0),
+(2, 'HR', 3, 3, 1, NULL, NULL, NULL, 0),
+(3, 'New', 4, 4, 1, NULL, NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -299,7 +323,7 @@ ALTER TABLE `wings`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `booking_rules`
@@ -311,7 +335,7 @@ ALTER TABLE `booking_rules`
 -- AUTO_INCREMENT for table `seats`
 --
 ALTER TABLE `seats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `shift`
@@ -323,7 +347,7 @@ ALTER TABLE `shift`
 -- AUTO_INCREMENT for table `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `table_settings`
@@ -341,7 +365,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wings`
 --
 ALTER TABLE `wings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
